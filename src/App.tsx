@@ -43,10 +43,10 @@ function App() {
               <img width={24} src={raifLogoSrc} /> <input value={raif} disabled />
             </p>
             <p>
-              <img width={24} src={sberLogoSrc} /> <input value={tink} disabled />
+              <img width={24} src={sberLogoSrc} /> <input value={sber} disabled />
             </p>
             <p>
-              <img width={24} src={tinkLogoSrc} /> <input value={sber} disabled />
+              <img width={24} src={tinkLogoSrc} /> <input value={tink} disabled />
             </p>
             <p>
               <label>Unistream:</label>
