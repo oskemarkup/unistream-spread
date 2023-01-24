@@ -9,6 +9,7 @@ const tinkLogoSrc = 'https://acdn.tinkoff.ru/params/common_front/resourses/icons
 function App() {
   const [ date, setDate ] = useState<number>(Date.now());
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
+  const [ isFetching, setIsFetching ] = useState<boolean>(false);
   const [ raif, setRaif ] = useState<number>(0);
   const [ sber, setSber ] = useState<number>(0);
   const [ tink, setTink ] = useState<number>(0);
@@ -17,10 +18,12 @@ function App() {
   const [ binancePercent, setBinancePercent ] = useState<number>(0.1);
 
   useEffect(() => {
+    setIsFetching(true);
     fetch('https://unistream-spread-backend-46zcznlnv-oskemarkup.vercel.app/prices')
         .then(response => response.json())
         .then(data => {
           setIsLoading(false);
+          setIsFetching(false);
           setRaif(data.raif);
           setSber(data.sber);
           setTink(data.tink);
