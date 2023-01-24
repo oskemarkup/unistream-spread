@@ -7,6 +7,7 @@ const sberLogoSrc = 'https://www.sberbank.com/portalserver/static/templates/%5BB
 const tinkLogoSrc = 'https://acdn.tinkoff.ru/params/common_front/resourses/icons/icon-192x192.png';
 
 function App() {
+  const [ date, setDate ] = useState<number>(Date.now());
   const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const [ raif, setRaif ] = useState<number>(0);
   const [ sber, setSber ] = useState<number>(0);
@@ -25,7 +26,7 @@ function App() {
           setTink(data.tink);
           setUnistream(data.uni);
         });
-  }, []);
+  }, [ date ]);
 
   const calcSpread = (rate: number): number => ((1 - percent / 100) * rate / (1 + binancePercent / 100) - unistream) / unistream * 100;
 
@@ -64,6 +65,7 @@ function App() {
             <h1>{raifSpread.toFixed(2)}% <img width={36} src={raifLogoSrc} /></h1>
             <h1>{sberSpread.toFixed(2)}% <img width={36} src={sberLogoSrc} /></h1>
             <h1>{tinkSpread.toFixed(2)}% <img width={36} src={tinkLogoSrc} /></h1>
+            <button onClick={() => setDate(Date.now())}>refresh</button>
           </div>
       )}
     </div>
