@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/unistream-spread/static/css/main.f398f6c6.css",
-    "main.js": "/unistream-spread/static/js/main.d14b403e.js",
+    "main.js": "/unistream-spread/static/js/main.c571d56b.js",
     "static/js/787.fcee4698.chunk.js": "/unistream-spread/static/js/787.fcee4698.chunk.js",
     "index.html": "/unistream-spread/index.html",
     "main.f398f6c6.css.map": "/unistream-spread/static/css/main.f398f6c6.css.map",
-    "main.d14b403e.js.map": "/unistream-spread/static/js/main.d14b403e.js.map",
+    "main.c571d56b.js.map": "/unistream-spread/static/js/main.c571d56b.js.map",
     "787.fcee4698.chunk.js.map": "/unistream-spread/static/js/787.fcee4698.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f398f6c6.css",
-    "static/js/main.d14b403e.js"
+    "static/js/main.c571d56b.js"
   ]
 }
