@@ -43,6 +43,7 @@ function App() {
           <p>loading</p>
       ) : (
           <div>
+            {isFetching && <p>fetching</p>}
             <p>
               <img width={24} src={raifLogoSrc} /> <input value={raif} disabled />
             </p>
