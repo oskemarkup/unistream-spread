@@ -16,7 +16,7 @@ function App() {
   const [ binancePercent, setBinancePercent ] = useState<number>(0.1);
 
   useEffect(() => {
-    fetch('https://unistream-spread.herokuapp.com/prices')
+    fetch('https://unistream-spread-backend-46zcznlnv-oskemarkup.vercel.app/prices')
         .then(response => response.json())
         .then(data => {
           setIsLoading(false);
