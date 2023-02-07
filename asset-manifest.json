@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/unistream-spread/static/css/main.f398f6c6.css",
-    "main.js": "/unistream-spread/static/js/main.c393e812.js",
+    "main.css": "/unistream-spread/static/css/main.9a3e6af0.css",
+    "main.js": "/unistream-spread/static/js/main.8cbb5694.js",
     "static/js/787.fcee4698.chunk.js": "/unistream-spread/static/js/787.fcee4698.chunk.js",
+    "static/media/logo-ru.svg": "/unistream-spread/static/media/logo-ru.01a67c3016d3173a7608d798371427ce.svg",
     "index.html": "/unistream-spread/index.html",
-    "main.f398f6c6.css.map": "/unistream-spread/static/css/main.f398f6c6.css.map",
-    "main.c393e812.js.map": "/unistream-spread/static/js/main.c393e812.js.map",
+    "main.9a3e6af0.css.map": "/unistream-spread/static/css/main.9a3e6af0.css.map",
+    "main.8cbb5694.js.map": "/unistream-spread/static/js/main.8cbb5694.js.map",
     "787.fcee4698.chunk.js.map": "/unistream-spread/static/js/787.fcee4698.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f398f6c6.css",
-    "static/js/main.c393e812.js"
+    "static/css/main.9a3e6af0.css",
+    "static/js/main.8cbb5694.js"
   ]
 }
