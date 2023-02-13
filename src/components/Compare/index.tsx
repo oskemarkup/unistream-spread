@@ -20,26 +20,28 @@ const Compare = () => {
   const bankWithoutFee = bankFee.isFixed ? bank.numValue - bankFee.numValue : bank.numValue * (100 - bankFee.numValue) / 100;
   const transferAmount = Math.min(Math.floor(Math.min(bankWithoutFee, maxTransferSum) / price), maxTransferAmount);
   const transferSum = transferAmount * price;
+  const transferFinalSum = bankFee.isFixed ? transferSum + bankFee.numValue : transferSum * (100 + bankFee.numValue) / 100;
   const calculatedFee = transferAmount * fee.numValue / 100;
   const factFee = Math.ceil(calculatedFee);
   const usdtAmount = networkFee.isFixed ? transferAmount - factFee - networkFee.numValue : (transferAmount - factFee) * (100 - networkFee.numValue) / 100;
-  const usdtPrice = transferSum / usdtAmount;
+  const usdtPrice = transferFinalSum / usdtAmount;
 
   const greedyFee = Math.floor(calculatedFee);
   const greedyTransferAmount = Math.floor(greedyFee / fee.numValue * 100);
   const greedyTransferSum = greedyTransferAmount * price;
+  const greedyTransferFinalSum = bankFee.isFixed ? greedyTransferSum + bankFee.numValue : greedyTransferSum * (100 + bankFee.numValue) / 100;
   const greedyUsdtAmount = networkFee.isFixed ? greedyTransferAmount - greedyFee - networkFee.numValue : (greedyTransferAmount - greedyFee) * (100 - networkFee.numValue) / 100;
-  const greedyUsdtPrice = greedyTransferSum / greedyUsdtAmount;
+  const greedyUsdtPrice = greedyTransferFinalSum / greedyUsdtAmount;
 
-  const middlePrice = (transferSum - greedyTransferSum) / (usdtAmount - greedyUsdtAmount);
+  const middlePrice = (transferFinalSum - transferFinalSum) / (usdtAmount - greedyUsdtAmount);
 
   const sellSum = sellPrice * usdtAmount;
-  const profit = sellSum - transferSum;
-  const percentProfit = profit / transferSum * 100;
+  const profit = sellSum - transferFinalSum;
+  const percentProfit = profit / transferFinalSum * 100;
 
   const greedySellSum = sellPrice * greedyUsdtAmount;
-  const greedyProfit = greedySellSum - greedyTransferSum;
-  const greedyPercentProfit = greedyProfit / greedyTransferSum * 100;
+  const greedyProfit = greedySellSum - greedyTransferFinalSum;
+  const greedyPercentProfit = greedyProfit / greedyTransferFinalSum * 100;
 
   const isGreedy = middlePrice > sellPrice;
 
@@ -47,7 +49,7 @@ const Compare = () => {
     <div className="variants">
       <div className={['variant', isGreedy && 'disabledVariant'].filter(Boolean).join(' ')}>
         <ul>
-          <li>Тратим {Number(transferSum.toFixed(2))} ₽</li>
+          <li>Тратим {Number(transferFinalSum.toFixed(2))} ₽</li>
           <li>Переводим {transferAmount} USD</li>
           <li>Расчетная комиссия {Number(calculatedFee.toFixed(2))} USD</li>
           <li>Комиссия {factFee} USD</li>
@@ -57,10 +59,10 @@ const Compare = () => {
           <li>Профит {Number(profit.toFixed(2))} ({Number(percentProfit.toFixed(2))}%)</li>
         </ul>
       </div>
-      {greedyTransferSum > 0 && (
+      {greedyTransferFinalSum > 0 && (
         <div className={['variant', !isGreedy && 'disabledVariant'].filter(Boolean).join(' ')}>
           <ul>
-            <li>Тратим {Number(greedyTransferSum.toFixed(2))} ₽</li>
+            <li>Тратим {Number(greedyTransferFinalSum.toFixed(2))} ₽</li>
             <li>Переводим {greedyTransferAmount} USD</li>
             <li>Комиссия {greedyFee} USD</li>
             <li>Получаем {greedyUsdtAmount} USDT</li>
