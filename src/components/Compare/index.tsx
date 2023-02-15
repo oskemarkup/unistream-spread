@@ -8,7 +8,9 @@ import { maxTransferAmount, maxTransferSum } from 'utils/constants';
 
 const Compare = () => {
   const offer = useSelector((state: RootState) => state.offer);
-  const { data: prices = [0, 0] } = api.useGetUnistreamRateQuery();
+  const { data: prices = [0, 0] } = api.useGetUnistreamRateQuery(undefined, {
+    pollingInterval: 10 * 1000,
+  });
   const price = Math.min(...prices);
   const { bank, bankFee, fee, networkFee } = useSelector((state: RootState) => state.form);
 

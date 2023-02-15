@@ -5,7 +5,9 @@ import api from 'store/api';
 import logo from './logo-ru.svg';
 
 const UnistreamRates = () => {
-  const { isLoading, isError, isSuccess, data: prices, refetch, isFetching } = api.useGetUnistreamRateQuery();
+  const { isLoading, isError, isSuccess, data: prices, refetch, isFetching } = api.useGetUnistreamRateQuery(undefined, {
+    pollingInterval: 10 * 1000,
+  });
 
   if (isLoading) {
     return (

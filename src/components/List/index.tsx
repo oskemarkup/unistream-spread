@@ -14,7 +14,9 @@ type ListProps = {
 const List = ({ bankName }: ListProps) => {
   const dispatch = useAppDispatch();
   const { bank } = useSelector((state: RootState) => state.form);
-  const { isSuccess, data, refetch, isFetching } = api.useGetBinanceRateQuery({ bankName, amount: bank.numValue });
+  const { isSuccess, data, refetch, isFetching } = api.useGetBinanceRateQuery({ bankName, amount: bank.numValue }, {
+    pollingInterval: 1000,
+  });
   const offer = useSelector((state: RootState) => state.offer);
   const { setOffer } = offerSlice.actions;
 
