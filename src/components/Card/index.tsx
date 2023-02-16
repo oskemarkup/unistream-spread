@@ -1,6 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import { BinanceCard } from 'utils/types';
+
+import styles from './style.module.css';
 
 type CardProps = BinanceCard & {
   isActive: boolean,
@@ -10,12 +13,15 @@ type CardProps = BinanceCard & {
 const Card = (props: CardProps) => {
   return (
     <div
-      className={[ 'card', props.isActive && 'activeCard' ].filter(Boolean).join(' ')}
+      className={classNames(styles.card, props.isActive && styles.card_active)}
       onClick={props.onClick}
     >
-      <p>{props.rate} P</p>
+      <div className={styles.header}>
+        <p className={styles.rate}>{props.rate}₽</p>
+        <p>{props.banks.join(' | ')}</p>
+      </div>
       <p>{props.min} - {props.max} ({props.amount} USDT)</p>
-      <p>{props.nickname} | {props.deals} | {props.percentage}%</p>
+      <p>{props.nickname} | {props.deals} | {Number(props.percentage.toFixed(2))}%</p>
     </div>
   );
 };

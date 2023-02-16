@@ -1,5 +1,7 @@
 import React, { ChangeEventHandler, FocusEventHandler } from 'react';
 
+import styles from './style.module.css';
+
 export type FieldProps = {
   name: string,
   label: string,
@@ -10,16 +12,16 @@ export type FieldProps = {
 };
 
 const Field = ({ name, label, value, onChange, onBlur, children }: FieldProps) => (
-  <div className="field">
-    <div className="field__label">{label}</div>
-    <div className="field__body">
+  <div className={styles.root}>
+    <div className={styles.label}>{label}</div>
+    <div className={styles.body}>
       <input
         name={name}
         type="text"
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className="field__input"
+        className={styles.input}
       />
       {children}
     </div>

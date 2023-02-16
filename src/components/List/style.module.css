@@ -1,0 +1,10 @@
+.root {
+    overflow-x: auto;
+    margin-right: -20px;
+    margin-left: -20px;
+}
+
+.list {
+    display: flex;
+    padding: 0 10px;
+}

@@ -2,6 +2,8 @@ import React from 'react';
 
 import Field, { FieldProps } from 'components/Field';
 
+import styles from './style.module.css';
+
 type FieldWithUnitProps = FieldProps & {
   isFixed: boolean,
   setIsFixed: (key: string, val: boolean) => void,
@@ -17,14 +19,14 @@ const FieldWithUnit = ({ name, label, value, onChange, onBlur, isFixed, setIsFix
     onBlur={onBlur}
   >
     <button
-      className="field__button"
+      className={styles.button}
       disabled={!isFixed}
       onClick={() => setIsFixed(name, false)}
     >
       %
     </button>
     <button
-      className="field__button"
+      className={styles.button}
       disabled={isFixed}
       onClick={() => setIsFixed(name, true)}
     >

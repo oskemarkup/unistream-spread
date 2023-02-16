@@ -2,7 +2,9 @@ import React from 'react';
 
 import api from 'store/api';
 
-import logo from './logo-ru.svg';
+import logo from './logo.svg';
+import refreshIcon from './refresh.svg';
+import styles from './style.module.css';
 
 const UnistreamRates = () => {
   const { isLoading, isError, isSuccess, data: prices, refetch, isFetching } = api.useGetUnistreamRateQuery(undefined, {
@@ -25,16 +27,25 @@ const UnistreamRates = () => {
   }
 
   return (
-    <div className="uniheader">
-      <img className="uniLogo" src={logo} alt="" />
+    <div className={styles.root}>
+      <img className={styles.logo} src={logo} alt="" />
       {isSuccess && (
         <>
-          <button disabled={prices[0] > prices[1]}>{prices[0]}<span>Без промокода</span></button>
-          <button disabled={prices[1] > prices[0]}>{prices[1]}<span>Промокод &laquo;мц&raquo;</span></button>
+          <div className={[styles.rate, prices[0] > prices[1] && styles.rate_disabled].filter(Boolean).join(' ')}>
+            <span className={styles.rateValue}>{prices[0]}₽</span>
+            <span className={styles.rateDescription}>Без промокода</span>
+          </div>
+          <div className={[styles.rate, prices[1] > prices[0] && styles.rate_disabled].filter(Boolean).join(' ')}>
+            <span className={styles.rateValue}>{prices[1]}₽</span>
+            <span className={styles.rateDescription}>Промокод &laquo;мц&raquo;</span>
+          </div>
         </>
       )}
-      <button onClick={refetch}>refresh</button>
-      {isFetching && <span>loading</span>}
+      {!isFetching && (
+        <button className={styles.refresh} onClick={refetch}>
+          <img className={styles.refreshIcon} src={refreshIcon} alt="" />
+        </button>
+      )}
     </div>
   );
 };

@@ -8,4 +8,5 @@ export type BinanceCard = {
   deals: number,
   percentage: number,
   nickname: string,
+  banks: string[],
 };

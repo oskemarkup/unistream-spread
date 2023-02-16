@@ -1,0 +1,36 @@
+.table {
+    max-width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    line-height: 14px;
+    margin: 20px 0 0;
+}
+
+.table thead {
+    border-bottom: 2px solid #ccc;
+}
+
+.table tfoot {
+    border-top: 2px solid #ccc;
+}
+
+.table tr {
+    border-bottom: 1px solid #eee;
+}
+
+.table tr:last-child {
+    border-bottom: none;
+}
+
+.table th,
+.table td {
+    padding: 5px 10px;
+}
+
+.table th:first-child {
+    text-align: right;
+}
+
+.highlighted {
+    background: rgba(0, 0, 0, 0.05);
+}

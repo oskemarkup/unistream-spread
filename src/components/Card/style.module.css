@@ -1,0 +1,33 @@
+.card {
+    flex-shrink: 0;
+    background: #eee;
+    box-sizing: border-box;
+    border: 2px solid #eee;
+    border-radius: 7px;
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 11px;
+    line-height: 13px;
+}
+
+.card_active {
+    background: transparent;
+    border: 2px solid #ccc;
+    border-radius: 7px;
+}
+
+.card p {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rate {
+    font-size: 15px;
+    line-height: 18px;
+}

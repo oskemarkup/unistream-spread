@@ -7,14 +7,15 @@ import offerSlice from 'store/offerSlice';
 
 import Card from 'components/Card';
 
-type ListProps = {
-  bankName: string,
-};
+import styles from './style.module.css';
 
-const List = ({ bankName }: ListProps) => {
+const List = () => {
   const dispatch = useAppDispatch();
   const { bank } = useSelector((state: RootState) => state.form);
-  const { isSuccess, data, refetch, isFetching } = api.useGetBinanceRateQuery({ bankName, amount: bank.numValue }, {
+  const { isSuccess, data } = api.useGetBinanceRateQuery({
+    bankNames: ['sber', 'raif', 'tink'],
+    amount: bank.numValue,
+  }, {
     pollingInterval: 1000,
   });
   const offer = useSelector((state: RootState) => state.offer);
@@ -22,22 +23,18 @@ const List = ({ bankName }: ListProps) => {
 
   if (isSuccess) {
     return (
-      <>
-        <div className="list">
-          <div className="list2">
-            {data.map(card => (
-              <Card
-                key={card.id}
-                {...card}
-                isActive={offer ? card.id === offer.id : false}
-                onClick={() => dispatch(setOffer(card))}
-              />
-            ))}
-          </div>
+      <div className={styles.root}>
+        <div className={styles.list}>
+          {data.map(card => (
+            <Card
+              key={card.id}
+              {...card}
+              isActive={offer ? card.id === offer.id : false}
+              onClick={() => dispatch(setOffer(card))}
+            />
+          ))}
         </div>
-        <button onClick={refetch}>refresh</button>
-        {isFetching && <span>loading</span>}
-      </>
+      </div>
     );
   }
 

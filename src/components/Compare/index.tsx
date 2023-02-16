@@ -1,10 +1,13 @@
 import React  from 'react';
 import { useSelector } from 'react-redux';
+import classNames from 'classnames';
 
 import { RootState } from 'store';
 import api from 'store/api';
 
 import { maxTransferAmount, maxTransferSum } from 'utils/constants';
+
+import styles from './style.module.css';
 
 const Compare = () => {
   const offer = useSelector((state: RootState) => state.offer);
@@ -14,11 +17,6 @@ const Compare = () => {
   const price = Math.min(...prices);
   const { bank, bankFee, fee, networkFee } = useSelector((state: RootState) => state.form);
 
-  if (!offer) {
-    return null;
-  }
-
-  const sellPrice = offer.price;
   const bankWithoutFee = bankFee.isFixed ? bank.numValue - bankFee.numValue : bank.numValue * (100 - bankFee.numValue) / 100;
   const transferAmount = Math.min(Math.floor(Math.min(bankWithoutFee, maxTransferSum) / price), maxTransferAmount);
   const transferSum = transferAmount * price;
@@ -35,7 +33,17 @@ const Compare = () => {
   const greedyUsdtAmount = networkFee.isFixed ? greedyTransferAmount - greedyFee - networkFee.numValue : (greedyTransferAmount - greedyFee) * (100 - networkFee.numValue) / 100;
   const greedyUsdtPrice = greedyTransferFinalSum / greedyUsdtAmount;
 
-  const middlePrice = (transferFinalSum - transferFinalSum) / (usdtAmount - greedyUsdtAmount);
+  const middlePrice = (transferFinalSum - greedyTransferFinalSum) / (usdtAmount - greedyUsdtAmount);
+
+  const middlePriceParagraph = (
+    <p>Граница &laquo;жадности&raquo;: {Number(middlePrice.toFixed(2))}</p>
+  );
+
+  if (!offer) {
+    return middlePriceParagraph;
+  }
+
+  const sellPrice = offer.price;
 
   const sellSum = sellPrice * usdtAmount;
   const profit = sellSum - transferFinalSum;
@@ -47,34 +55,97 @@ const Compare = () => {
 
   const isGreedy = middlePrice > sellPrice;
 
+  const tableData = {
+    body: [
+      {
+        label: 'Тратим, ₽',
+        value: transferFinalSum,
+        greedyValue: greedyTransferFinalSum,
+      },
+      {
+        label: 'Переводим, USD',
+        value: transferAmount,
+        greedyValue: greedyTransferAmount,
+      },
+      {
+        label: 'Расчетная комиссия, USD',
+        value: calculatedFee,
+        greedyValue: greedyFee,
+      },
+      {
+        label: 'Комиссия, USD',
+        value: factFee,
+        greedyValue: greedyFee,
+      },
+      {
+        label: 'Получаем, USDT',
+        value: usdtAmount,
+        greedyValue: greedyUsdtAmount,
+      },
+      {
+        label: 'Цена закупа, ₽',
+        value: usdtPrice,
+        greedyValue: greedyUsdtPrice,
+      },
+      {
+        label: 'Продаем на, ₽',
+        value: sellSum,
+        greedyValue: greedySellSum,
+      },
+    ],
+    footer: [
+      {
+        label: 'Профит, ₽',
+        value: profit,
+        greedyValue: greedyProfit,
+      },
+      {
+        label: 'Профит, %',
+        value: percentProfit,
+        greedyValue: greedyPercentProfit,
+      },
+    ],
+  };
+
   return (
-    <div className="variants">
-      <div className={['variant', isGreedy && 'disabledVariant'].filter(Boolean).join(' ')}>
-        <ul>
-          <li>Тратим {Number(transferFinalSum.toFixed(2))} ₽</li>
-          <li>Переводим {transferAmount} USD</li>
-          <li>Расчетная комиссия {Number(calculatedFee.toFixed(2))} USD</li>
-          <li>Комиссия {factFee} USD</li>
-          <li>Получаем {usdtAmount} USDT</li>
-          <li>Цена закупа {Number(usdtPrice.toFixed(2))} ₽</li>
-          <li>Продаем на {Number(sellSum.toFixed(2))}</li>
-          <li>Профит {Number(profit.toFixed(2))} ({Number(percentProfit.toFixed(2))}%)</li>
-        </ul>
-      </div>
-      {greedyTransferFinalSum > 0 && (
-        <div className={['variant', !isGreedy && 'disabledVariant'].filter(Boolean).join(' ')}>
-          <ul>
-            <li>Тратим {Number(greedyTransferFinalSum.toFixed(2))} ₽</li>
-            <li>Переводим {greedyTransferAmount} USD</li>
-            <li>Комиссия {greedyFee} USD</li>
-            <li>Получаем {greedyUsdtAmount} USDT</li>
-            <li>Цена закупа {Number(greedyUsdtPrice.toFixed(2))} ₽</li>
-            <li>Продаем на {Number(greedySellSum.toFixed(2))}</li>
-            <li>Профит {Number(greedyProfit.toFixed(2))} ({Number(greedyPercentProfit.toFixed(2))}%)</li>
-          </ul>
-        </div>
-      )}
-    </div>
+    <>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th className={classNames(!isGreedy && styles.highlighted)}>Щедрый</th>
+            <th className={classNames(isGreedy && styles.highlighted)}>Жадный</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableData.body.map(row => (
+            <tr key={row.label}>
+              <th>{row.label}</th>
+              <td className={classNames(!isGreedy && styles.highlighted)}>
+                {Number(row.value.toFixed(2))}
+              </td>
+              <td className={classNames(isGreedy && styles.highlighted)}>
+                {Number(row.greedyValue.toFixed(2))}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          {tableData.footer.map(row => (
+            <tr key={row.label}>
+              <th>{row.label}</th>
+              <td className={classNames(!isGreedy && styles.highlighted)}>
+                {Number(row.value.toFixed(2))}
+              </td>
+              <td className={classNames(isGreedy && styles.highlighted)}>
+                {Number(row.greedyValue.toFixed(2))}
+              </td>
+            </tr>
+          ))}
+        </tfoot>
+      </table>
+      {middlePriceParagraph}
+    </>
   );
 };
 
