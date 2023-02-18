@@ -9,11 +9,15 @@ import Card from 'components/Card';
 
 import styles from './style.module.css';
 
-const List = () => {
+type ListProps = {
+  bankName: string,
+};
+
+const List = ({ bankName }: ListProps) => {
   const dispatch = useAppDispatch();
   const { bank } = useSelector((state: RootState) => state.form);
   const { isSuccess, data } = api.useGetBinanceRateQuery({
-    bankNames: ['sber', 'raif', 'tink'],
+    bankNames: [bankName],
     amount: bank.numValue,
   }, {
     pollingInterval: 1000,

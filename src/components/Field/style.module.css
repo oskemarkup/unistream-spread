@@ -1,5 +1,5 @@
 .root {
-    margin: 0 0 6px;
+    margin: 0 0 4px;
 }
 
 .body {
@@ -8,8 +8,8 @@
 
 .label {
     font: inherit;
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 13px;
+    line-height: 16px;
     display: inline-block;
     margin: 0 0 2px;
 }
@@ -17,10 +17,10 @@
 .input {
     border: 1px solid #999;
     border-radius: 6px;
-    padding: 8px;
+    padding: 7px;
     margin: 0;
     outline: 0;
-    height: 24px;
+    height: 22px;
     font: inherit;
     font-size: 12px;
     line-height: 18px;

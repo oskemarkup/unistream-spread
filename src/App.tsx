@@ -11,7 +11,9 @@ const App = () => (
   <div className="app">
     <SettingsForm />
     <UnistreamRates />
-    <List />
+    <List bankName="tink" />
+    <List bankName="sber" />
+    <List bankName="raif" />
     <Compare />
   </div>
 );

@@ -1,7 +1,6 @@
 .root {
     overflow-x: auto;
-    margin-right: -20px;
-    margin-left: -20px;
+    margin: 0 -20px 10px;
 }
 
 .list {
