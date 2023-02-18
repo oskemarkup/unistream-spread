@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/unistream-spread/static/css/main.6261f851.css",
-    "main.js": "/unistream-spread/static/js/main.7ab9fd76.js",
+    "main.css": "/unistream-spread/static/css/main.7fdf242d.css",
+    "main.js": "/unistream-spread/static/js/main.c305f8d9.js",
     "static/js/787.fcee4698.chunk.js": "/unistream-spread/static/js/787.fcee4698.chunk.js",
     "static/media/logo.svg": "/unistream-spread/static/media/logo.01a67c3016d3173a7608d798371427ce.svg",
     "static/media/refresh.svg": "/unistream-spread/static/media/refresh.2271ce9a561d6a772021ebd506d7618d.svg",
     "index.html": "/unistream-spread/index.html",
-    "main.6261f851.css.map": "/unistream-spread/static/css/main.6261f851.css.map",
-    "main.7ab9fd76.js.map": "/unistream-spread/static/js/main.7ab9fd76.js.map",
+    "main.7fdf242d.css.map": "/unistream-spread/static/css/main.7fdf242d.css.map",
+    "main.c305f8d9.js.map": "/unistream-spread/static/js/main.c305f8d9.js.map",
     "787.fcee4698.chunk.js.map": "/unistream-spread/static/js/787.fcee4698.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6261f851.css",
-    "static/js/main.7ab9fd76.js"
+    "static/css/main.7fdf242d.css",
+    "static/js/main.c305f8d9.js"
   ]
 }
